@@ -92,3 +92,28 @@ fiboSup a b v = fiboSup b (a + b) (v - 1)
 
 fibo :: Int -> Int
 fibo = fiboSup 0 1
+
+primoAux :: Int -> Int -> Bool
+primoAux k n    | k >= n             = k == n
+                | n `mod` k == 0     = False
+                | otherwise          = primoAux (k + 1) n
+
+primo :: Int -> Bool
+primo = primoAux 2
+
+ordina :: (Int, Int, Int) -> (Int, Int, Int)
+ordina (a, b, c) | a > b                 = ordina (b, a, c)
+ordina (a, b, c) | b > c                 = ordina (a, c, b)
+ordina x = x
+
+
+fact2 :: Int -> Int
+fact2 x | x >= 2               = x * fact2 (x - 1)
+        | otherwise            = 1
+
+
+
+euclide :: Int -> Int -> Int
+euclide m n     | m > n            = euclide (m - n) n
+                | n > m            = euclide m (n - m)
+                | otherwise        = m
