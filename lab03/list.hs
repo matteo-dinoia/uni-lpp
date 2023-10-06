@@ -77,3 +77,24 @@ split2 :: [Int] -> ([Int], [Int])
 split2 xs = (take n xs, drop n xs)
     where
         n = length xs `div` 2
+
+
+
+--ES extra liste
+last_sum :: [Int] -> Bool
+last_sum = aux 0
+    where
+        aux n [x] = x == n
+        aux n (x:xs) = aux (n + x) xs
+
+last_sum_lib :: [Int] -> Bool
+last_sum_lib xs = sum xs == 2 * last xs
+    where
+        last = head . inverti
+
+
+inverti2 :: [Int] -> [Int]
+inverti2 xs = accum xs []
+    where
+        accum [] acc = acc
+        accum (x:xs) acc = accum xs (x:acc)
