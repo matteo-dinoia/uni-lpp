@@ -41,15 +41,14 @@ filterr f xs = foldr aux [] xs
 
 
 isSub :: Eq a => [a] -> [a] -> Bool
-isSub = aux False
-    where
-        aux _ _ [] = True
-        aux _ [] _ = False
-        aux False xs ys | head xs == head ys      = aux True (tail xs) (tail ys) || aux False (tail xs) ys 
-                        | otherwise               = aux False (tail xs) ys
-        aux True xs ys  | head xs == head ys      = aux True (tail xs) (tail ys) 
-                        | otherwise               = False
+isSub [] _ = True
+isSub _ [] = False
+isSub (x : xs) (y : ys)     | x == y      = isSub xs ys
+                            | otherwise   = isSub (x: xs) ys
 
-allSub :: [Int] -> [[Int]]
+
+allSub :: [a] -> [[a]]
 allSub [] = [[]]
-allSub xs = head (xs) : allSub (xs) ++ allSub(xs)
+allSub (x : xs) = xss ++ map (x :) xss
+  where
+    xss = allSub xs
